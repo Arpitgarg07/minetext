@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineText Spaces</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🌌 MineText Spaces</h1>
+            <p>Create your personalized space and share content with your community</p>
+        </header>
+
+        <main>
+            <!-- Create Space Section -->
+            <section class="section" id="createSection">
+                <h2>Create New Space</h2>
+                <form id="createSpaceForm" class="form">
+                    <div class="form-group">
+                        <label for="spaceName">Space Name (public)</label>
+                        <input 
+                            type="text" 
+                            id="spaceName" 
+                            name="name" 
+                            placeholder="my-awesome-space" 
+                            pattern="[a-zA-Z0-9-_]{3,40}"
+                            title="3-40 characters, letters, numbers, hyphens and underscores only"
+                            required 
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="viewPassword">View Password</label>
+                        <input 
+                            type="password" 
+                            id="viewPassword" 
+                            name="viewPassword" 
+                            placeholder="Password for viewing content (min 6 chars)" 
+                            minlength="6"
+                            required 
+                        />
+                        <small>This password allows read-only access to view space content</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="adminPassword">Admin Password</label>
+                        <input 
+                            type="password" 
+                            id="adminPassword" 
+                            name="adminPassword" 
+                            placeholder="Password for admin access (min 6 chars)" 
+                            minlength="6"
+                            required 
+                        />
+                        <small>This password allows full admin access to add/edit/delete content</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create Space</button>
+                </form>
+            </section>
+
+            <!-- Open Space Section -->
+            <section class="section" id="openSection">
+                <h2>Open Existing Space</h2>
+                <form id="openSpaceForm" class="form">
+                    <div class="form-group">
+                        <label for="openSpaceName">Space Name</label>
+                        <input 
+                            type="text" 
+                            id="openSpaceName" 
+                            name="name" 
+                            placeholder="Enter space name" 
+                            required 
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="openPassword">Password</label>
+                        <input 
+                            type="password" 
+                            id="openPassword" 
+                            name="password" 
+                            placeholder="View or Admin password" 
+                            required 
+                        />
+                        <small>Use view password for read-only access, or admin password for full control</small>
+                    </div>
+                    <button type="submit" class="btn btn-secondary">Open Space</button>
+                </form>
+            </section>
+
+            <!-- Space Viewer -->
+            <section class="section" id="spaceViewer" style="display: none;">
+                <div class="space-header">
+                    <h2 id="spaceTitle"></h2>
+                    <button id="backBtn" class="btn btn-small">← Back</button>
+                </div>
+                
+                <div id="spaceContent"></div>
+                
+                <!-- Admin Section -->
+                <div id="adminSection" class="admin-section">
+                    <h3>Access Level</h3>
+                    <p class="admin-status" id="adminStatus" style="color: #dc3545; font-weight: 600;">
+                        🔒 Not logged in
+                    </p>
+                    
+                    <div id="adminActions" style="display: none;">
+                        <form id="addContentForm" class="form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="contentText">Content Text</label>
+                                <textarea 
+                                    id="contentText" 
+                                    name="text" 
+                                    placeholder="Share something with your space..." 
+                                    maxlength="5000"
+                                ></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="contentImages">Images (optional)</label>
+                                <input 
+                                    type="file" 
+                                    id="contentImages" 
+                                    name="images" 
+                                    multiple 
+                                    accept="image/*" 
+                                />
+                                <small>Max 6 images, 5MB each</small>
+                                <div id="imagePreview" class="image-preview" aria-live="polite"></div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Content</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Edit Modal -->
+        <div id="editModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="editModalTitle">
+            <div class="modal-content">
+                <h3 id="editModalTitle">Edit Content</h3>
+                <textarea id="editContentText" rows="6"></textarea>
+                <div class="modal-actions">
+                    <button id="saveEditBtn" class="btn btn-primary">Save</button>
+                    <button id="cancelEditBtn" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirm Delete Modal -->
+        <div id="confirmDeleteModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="confirmDeleteTitle">
+            <div class="modal-content">
+                <h3 id="confirmDeleteTitle">Confirm Delete</h3>
+                <p>Are you sure you want to delete this content? This cannot be undone.</p>
+                <div class="modal-actions">
+                    <button id="confirmDeleteBtn" class="btn btn-primary">Delete</button>
+                    <button id="cancelDeleteBtn" class="btn btn-secondary">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading indicator -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+
+        <!-- Messages -->
+        <div id="messages" class="messages"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

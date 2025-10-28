@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineText - Your Personal Space</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>Loading...</p>
+    </div>
+
+    <div id="messages" class="messages"></div>
+
+    <!-- Homepage -->
+    <div id="homePage" class="home-page">
+        <div class="home-container">
+            <div class="logo">📦</div>
+            <h1 class="home-title">MineText</h1>
+            <p class="home-subtitle">Your Personal Content Space</p>
+            
+            <div class="home-description">
+                <p>MineText lets you create personalized spaces to store and share your content.</p>
+                <ul class="feature-list">
+                    <li>📝 Add text and images to your space</li>
+                    <li>🔒 Secure with two levels of access</li>
+                    <li>👁️ Share view-only access with others</li>
+                    <li>⚡ Fast and easy to use</li>
+                </ul>
+            </div>
+
+            <div class="home-form">
+                <input type="text" id="spaceNameInput" placeholder="Enter your space name" />
+                <button id="goButton" class="btn-go">Go</button>
+            </div>
+
+            <p class="home-hint">Enter a space name to create a new space or access an existing one</p>
+        </div>
+    </div>
+
+    <!-- Password Modal Overlay -->
+    <div id="passwordOverlay" class="password-overlay" style="display: none;">
+        <div class="password-card">
+            <button class="close-btn" id="closePasswordModal">&times;</button>
+            
+            <div id="passwordContent">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Space Viewer -->
+    <div id="spaceViewer" class="space-viewer" style="display: none;">
+        <div class="navbar">
+            <button id="backButton" class="btn-back">← Back</button>
+            <h2 id="spaceTitle">Space</h2>
+            <div id="adminStatus" class="admin-status">🔒 Not logged in</div>
+        </div>
+
+        <div class="tabs-container">
+            <!-- Tab Headers -->
+            <div class="tabs-header">
+                <div id="tabsList" class="tabs-list">
+                    <!-- Tabs will be dynamically inserted here -->
+                </div>
+                <button id="addTabButton" class="add-tab-btn" style="display: none;">+ New Tab</button>
+            </div>
+
+            <!-- Tab Content Area -->
+            <div class="tabs-content-area">
+                <div id="tabContent" class="tab-content-display">
+                    <!-- Active tab content will be displayed here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox -->
+    <div id="imageLightbox" class="image-lightbox" style="display: none;">
+        <button class="lightbox-close" id="closeLightbox">&times;</button>
+        <img id="lightboxImage" src="" alt="Full size image" />
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
